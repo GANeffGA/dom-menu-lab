@@ -100,26 +100,26 @@ let showingSubMenu = false;
 //The first line of code of the event listener function should call the event object's preventDefault() method.
 //The second line of code function should immediately return if the element clicked was not an <a> element.
 
-topMenuEl.addEventListener('click', function(evt) {
+topMenuEl.addEventListener('click', handleClick);
+function handleClick(evt){
   evt.preventDefault();
-  const link = evy.target;
-  if (link.tagName !== 'A') return;
+  if (link.target.tagName !== 'A') {return;}
   console.log(link.textContent);
-})
+
 
 // Task 5.3 This feature "deselects" the menu item if it's clicked when it's currently active, resulting in the sub-menu sliding up as well.
 
-if (link.classList.contains('active')) {
-  link.classList.remove('active');
+if (evt.target.classList.contains('active')) {
+  evt.target.classList.remove('active');
   showingSubMenu = false;
   subMenuEl.style.top = '0';
-  
+  return;
 }
 
 // Task 5.4 Add code to the bottom of the the event listener that iterates over each <a> element in topMenuLinks and removes the class name of active, regardless of whether the <a> element has a class of active or not.
 
 topMenuLinks.forEach(function(link) {
-  link.classList.remove('active');
+  link.classList.remove('active')
 });
 
 // Task 5.5 Next, the event listener should add a class name of active to the <a> element that was clicked.
@@ -194,5 +194,6 @@ topMenuLinks.forEach(function(link) {
 // Task 6.3
 // Next, subMenuEl's event listener should update the contents of mainEl to the contents of the <a> element, within an <h1>, clicked within subMenuEl.
 
-mainEl.innerHTML = h1>(link.textContent)<h1
+mainEl.innerHTML = `<h1>${evt.target.textContent}</h1>`;
 
+}
